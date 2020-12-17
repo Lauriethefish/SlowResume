@@ -1,0 +1,41 @@
+{
+  "id": "slow-resume",
+  "name": "SlowResume",
+  "version": "0.1.0",
+  "author": "Lauriethefish#6700 (comissioned by KaiØKęnX20)",
+  "description": [
+    "Allows you to change how long it takes to resume. Disables score submission if changed."
+  ],
+  "category": "Gameplay",
+  "gameVersion": "1.13.0",
+  "platform": "Quest",
+  "components": [
+    {
+      "type": "HookMod",
+      "installAction": {
+        "installLibraryFile": "libslow-resume.so"
+      },
+      "uninstallAction": {
+        "removeLibraryFile": "libslow-resume.so"
+      }
+    },
+    {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "libquestui.so"
+      }
+    },
+    {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "libbs-utils.so"
+      }
+    },
+    {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "libcustom-types.so"
+      }
+    }
+  ]
+}
