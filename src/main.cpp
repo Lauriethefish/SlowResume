@@ -1,5 +1,6 @@
 #include "main.hpp"
 #include "GlobalNamespace/PauseAnimationController.hpp"
+#include "GlobalNamespace/ScoreController.hpp"
 #include "UnityEngine/Animator.hpp"
 using namespace GlobalNamespace;
 
@@ -53,6 +54,13 @@ MAKE_HOOK_OFFSETLESS(PauseAnimationController_StartResumeFromPauseAnimation, voi
     PauseAnimationController_StartResumeFromPauseAnimation(self);
 }
 
+// Manually re-enable score submission when scoring starts, because bs-utils isn't doing it automatically . . .
+MAKE_HOOK_OFFSETLESS(ScoreController_Start, void, ScoreController* self) {
+    getLogger().info("Re-enabling score submission . . .");
+    bs_utils::Submission::enable(modInfo);
+    ScoreController_Start(self);
+}
+
 // Called at the early stages of game loading
 extern "C" void setup(ModInfo& info) {
     info.id = ID;
@@ -75,8 +83,10 @@ extern "C" void load() {
 
     QuestUI::Register::RegisterModSettingsViewController<SettingsViewController*>(modInfo); // Make QuestUI show it as an option in mod settings
 
-    // Install our hook
+    // Install our hooks
     INSTALL_HOOK_OFFSETLESS(PauseAnimationController_StartResumeFromPauseAnimation, 
                             il2cpp_utils::FindMethodUnsafe("", "PauseAnimationController", "StartResumeFromPauseAnimation", 0));
+    INSTALL_HOOK_OFFSETLESS(ScoreController_Start, 
+                            il2cpp_utils::FindMethodUnsafe("", "ScoreController", "Start", 0));
     getLogger().info("Installed all hooks!");
 }
