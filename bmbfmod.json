@@ -2,6 +2,8 @@
   "id": "slow-resume",
   "name": "SlowResume",
   "version": "0.1.0",
+  "icon": "cover.png",
+  "coverImageFilename": "cover.png",
   "author": "Lauriethefish#6700 (comissioned by KaiØKęnX20)",
   "description": [
     "Allows you to change how long it takes to resume. Disables score submission if changed."
