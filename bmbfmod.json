@@ -1,7 +1,7 @@
 {
   "id": "slow-resume",
   "name": "SlowResume",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "icon": "cover.png",
   "coverImageFilename": "cover.png",
   "author": "Lauriethefish#6700 (comissioned by KaiØKęnX20)",
@@ -22,6 +22,19 @@
       }
     },
     {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "libbeatsaber-hook_1_0_9.so"
+      }
+    },
+    {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "libcodegen_0_5_3.so"
+      }
+    },
+    {
+      
       "type": "HookModLibrary",
       "installAction": {
         "installLibraryFile": "libquestui.so"

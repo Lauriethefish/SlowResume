@@ -21,9 +21,9 @@ Configuration& getConfig() {
 }
 
 // Returns a logger, useful for printing debug messages
-const Logger& getLogger() {
-    static const Logger logger(modInfo);
-    return logger;
+Logger& getLogger() {
+    static Logger* logger = new Logger(modInfo);
+    return *logger;
 }
 
 // Creates a default config file if one does not already exist
@@ -84,9 +84,9 @@ extern "C" void load() {
     QuestUI::Register::RegisterModSettingsViewController<SettingsViewController*>(modInfo); // Make QuestUI show it as an option in mod settings
 
     // Install our hooks
-    INSTALL_HOOK_OFFSETLESS(PauseAnimationController_StartResumeFromPauseAnimation, 
+    INSTALL_HOOK_OFFSETLESS(getLogger(), PauseAnimationController_StartResumeFromPauseAnimation, 
                             il2cpp_utils::FindMethodUnsafe("", "PauseAnimationController", "StartResumeFromPauseAnimation", 0));
-    INSTALL_HOOK_OFFSETLESS(ScoreController_Start, 
+    INSTALL_HOOK_OFFSETLESS(getLogger(), ScoreController_Start, 
                             il2cpp_utils::FindMethodUnsafe("", "ScoreController", "Start", 0));
     getLogger().info("Installed all hooks!");
 }
